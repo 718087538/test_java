@@ -1,6 +1,7 @@
 package mains.category;
 
 import mains.model.FisrtCategory;
+import mains.model.*;
 import mains.mappers.CategoryMapper;
 import mains.other.Result;
 import org.apache.ibatis.io.Resources;
@@ -56,12 +57,26 @@ public class Category {
         return Result.ok("成功插入");
     }
 
-
-
     @GetMapping("/admin/category")
     public List<FisrtCategory> category(){
         CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
         List<FisrtCategory> category = categoryMapper.getCategory();
         return category;
+    }
+
+    @PostMapping("/admin/secondCategory")
+    public Result addSecondCategory(int first_category_id,String second_category){
+        SecondCategory secondCategory = new SecondCategory(first_category_id,second_category);
+        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        categoryMapper.addSecondCategory(secondCategory);
+        return Result.ok("成功新增二级标签");
+    }
+
+    @GetMapping("/admin/secondCategory")
+    public List<SecondCategory> secondCategory(){
+        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        List<SecondCategory> categories = categoryMapper.getSecondCategory();
+        return  categories;
+
     }
 }
