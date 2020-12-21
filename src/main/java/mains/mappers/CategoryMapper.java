@@ -12,6 +12,10 @@ public interface CategoryMapper {
     public int addSecondCategory(SecondCategory second_category);
     @Select("select * from second_category")
     public  List<SecondCategory> getSecondCategory();
+    @Update("update second_category set is_del=1 where id=#{id}")
+    public  int delSecondCategory(SecondCategory second_category);
+    @Update("update second_category set second_category=#{second_category} where id=#{id}")
+    public  int putSecondCategory(SecondCategory second_category);
 
 
     @Update("update first_category set first_category=#{first_category} where id=#{id}")

@@ -9,11 +9,17 @@ public class SecondCategory {
     public SecondCategory() {
 
     }
+    public SecondCategory(int id){
+        this.id = id;
+    }
     public SecondCategory(int first_category_id, String second_category) {
         this.first_category_id = first_category_id;
         this.second_category = second_category;
     }
-
+//    public  SecondCategory(int id, String second_category) {
+//        this.id = id;
+//        this.second_category = second_category;
+//    }
     public SecondCategory(int id, int first_category_id, String second_category, int id_del) {
         this.id = id;
         this.first_category_id = first_category_id;

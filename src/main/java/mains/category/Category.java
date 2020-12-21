@@ -8,10 +8,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -77,6 +74,23 @@ public class Category {
         CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
         List<SecondCategory> categories = categoryMapper.getSecondCategory();
         return  categories;
+    }
 
+    @DeleteMapping("/admin/secondCategory")
+    public Result delSecondCategory(int id){
+        SecondCategory secondCategory = new SecondCategory(id);
+        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        categoryMapper.delSecondCategory(secondCategory);
+        return Result.ok("删除成功");
+    }
+    @PutMapping("/admin/secondCategory")
+    public Result putSecondCategory(int id,String second_category){
+        System.out.println("id的值是："+id+"名字是"+second_category);
+        SecondCategory secondCategory = new SecondCategory(id,second_category);//???参数类型一样，值不一样，怎么办?
+
+        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        System.out.println("对象是"+categoryMapper);
+        categoryMapper.putSecondCategory(secondCategory);
+        return Result.ok("修改成功");
     }
 }
