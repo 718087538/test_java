@@ -1,6 +1,6 @@
 package mains.mappers;
 
-import mains.model.FisrtCategory;
+import mains.model.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -8,6 +8,16 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 public interface CategoryMapper {
+    @Insert("insert into second_category (first_category_id,second_category) values(#{first_category_id},#{second_category})")
+    public int addSecondCategory(SecondCategory second_category);
+    @Select("select * from second_category")
+    public  List<SecondCategory> getSecondCategory();
+    @Update("update second_category set is_del=1 where id=#{id}")
+    public  int delSecondCategory(SecondCategory second_category);
+    @Update("update second_category set second_category=#{second_category} where id=#{id}")
+    public  int putSecondCategory(SecondCategory second_category);
+
+
     @Update("update first_category set first_category=#{first_category} where id=#{id}")
     public int putFirstCategory(FisrtCategory first_category);
 
