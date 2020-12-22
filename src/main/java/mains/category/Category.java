@@ -63,10 +63,11 @@ public class Category {
 
     @PostMapping("/admin/secondCategory")
     public Result addSecondCategory(int first_category_id,String second_category){
-        SecondCategory secondCategory = new SecondCategory(first_category_id,second_category);
-        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
-        categoryMapper.addSecondCategory(secondCategory);
-        return Result.ok("成功新增二级标签");
+//        SecondCategory secondCategory = new SecondCategory(first_category_id,second_category);
+//        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+//        categoryMapper.addSecondCategory(secondCategory);
+//        return Result.ok("成功新增二级标签");
+        return null;
     }
 
     @GetMapping("/admin/secondCategory")
@@ -78,16 +79,19 @@ public class Category {
 
     @DeleteMapping("/admin/secondCategory")
     public Result delSecondCategory(int id){
-        SecondCategory secondCategory = new SecondCategory(id);
-        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
-        categoryMapper.delSecondCategory(secondCategory);
+//        SecondCategory secondCategory = new SecondCategory(id);
+//        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+//        categoryMapper.delSecondCategory(secondCategory);
         return Result.ok("删除成功");
     }
+
     @PutMapping("/admin/secondCategory")
     public Result putSecondCategory(int id,String second_category){
         System.out.println("id的值是："+id+"名字是"+second_category);
-        SecondCategory secondCategory = new SecondCategory(id,second_category);//???参数类型一样，值不一样，怎么办?
 
+        SecondCategory secondCategory = new SecondCategory();//???参数类型一样，值不一样，怎么办?
+        secondCategory.setId(id);
+        secondCategory.setSecond_category(second_category);
         CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
         System.out.println("对象是"+categoryMapper);
         categoryMapper.putSecondCategory(secondCategory);
