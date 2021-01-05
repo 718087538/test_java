@@ -8,6 +8,10 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 public interface CategoryMapper {
+    @Insert("insert into lesson (first_category_id,second_category_id) values(#{first_category_id},#{second_category_id})")
+    public int addLesson(Lesson Lesson);
+
+
     @Insert("insert into second_category (first_category_id,second_category) values(#{first_category_id},#{second_category})")
     public int addSecondCategory(SecondCategory second_category);
     @Select("select * from second_category")

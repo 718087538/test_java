@@ -97,4 +97,19 @@ public class Category {
         categoryMapper.putSecondCategory(secondCategory);
         return Result.ok("修改成功");
     }
+
+    //新建课程/教程
+    @PostMapping("/admin/lesson")
+    public Result addLesson(int first_category_id,int second_category_id,String title,String cover,String direction){
+        Lesson lesson = new Lesson();
+        System.out.println("参数"+first_category_id+","+second_category_id);
+        lesson.setFirst_category_id(first_category_id);
+        lesson.setSecond_category_id(second_category_id);
+
+//        secondCategory.setSecond_category(second_category);
+        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        System.out.println("对象是"+categoryMapper);
+        categoryMapper.addLesson(lesson);
+        return Result.ok("新增成功");
+    }
 }
