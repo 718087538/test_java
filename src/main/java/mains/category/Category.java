@@ -1,5 +1,6 @@
 package mains.category;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import mains.model.FisrtCategory;
 import mains.model.*;
 import mains.mappers.CategoryMapper;
@@ -105,11 +106,26 @@ public class Category {
         System.out.println("参数"+first_category_id+","+second_category_id);
         lesson.setFirst_category_id(first_category_id);
         lesson.setSecond_category_id(second_category_id);
+        lesson.setTitle(title);
+        lesson.setCover(cover);
+        lesson.setDirection(direction);
 
 //        secondCategory.setSecond_category(second_category);
         CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
         System.out.println("对象是"+categoryMapper);
         categoryMapper.addLesson(lesson);
         return Result.ok("新增成功");
+    }
+
+    //后台查询课程列表
+    @GetMapping("/admin/lesson")
+    public Result getLesson(String title){
+        Lesson lesson = new Lesson();
+        lesson.setTitle(title);
+        System.out.println("title-------------"+title);
+        CategoryMapper lessonMapper = sqlSession.getMapper(CategoryMapper.class);
+        List<Lesson> lessons = lessonMapper.getLesson(lesson);
+//        return lessons;
+        return Result.ok(lessons);
     }
 }
