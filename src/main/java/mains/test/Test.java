@@ -22,6 +22,12 @@ public class Test {
 
     @GetMapping("/test/readfile")
     public void readfilde() throws IOException {
+        String c = System.getProperty("user.dir");
+        System.out.println("路径-----"+c);
+        System.out.println("路径内容-----"+c+"/src/main/resources");
+
+
+
         String path = "../public";
         File f = new File(path,"t.png"); // 建立File变量,并设定由f变量引用
         System.out.println("文件长度：" + f.length() + "字节");
@@ -47,9 +53,12 @@ public class Test {
     public String testupimg(MultipartFile aaa) throws IOException {
         String oldName = aaa.getOriginalFilename();
         System.out.println("旧的文件名：" + oldName);
-//        String path = "E:/kingw2/test_java/src/main/resources/static/files/" +oldName;
-        String path = "src/main/resources/static/files/" +oldName;
-//        String path = "src/main/static/files/" +oldName;
+//        String path = "E:/kingw2/test_java/src/main/resources/static/files/" +oldName;//可行
+
+        String c = System.getProperty("user.dir");
+        String path = c + "/src/main/resources/static/files/" +oldName;
+
+        System.out.println("路径内容-----"+path);
 
         //创建文件路径
         File dest = new File(path);
