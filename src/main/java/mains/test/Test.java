@@ -1,6 +1,7 @@
 package mains.test;
 
 
+import cn.hutool.crypto.SecureUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,5 +66,14 @@ public class Test {
         aaa.transferTo(dest); //保存文件
 //        aaa.transferTo(new File("/static/files","t3.png"));
         return oldName;
+    }
+
+    @PostMapping("/testPass")
+    public String testPass(String pass){
+
+
+        //对密码进行加密
+        String md5 = SecureUtil.md5(pass).toUpperCase();
+        return md5;
     }
 }
