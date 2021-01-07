@@ -47,7 +47,14 @@ public class Test {
     public String testupimg(MultipartFile aaa) throws IOException {
         String oldName = aaa.getOriginalFilename();
         System.out.println("旧的文件名：" + oldName);
-        aaa.transferTo(new File("/static/files","t3.png"));
+//        String path = "E:/kingw2/test_java/src/main/resources/static/files/" +oldName;
+        String path = "src/main/resources/static/files/" +oldName;
+//        String path = "src/main/static/files/" +oldName;
+
+        //创建文件路径
+        File dest = new File(path);
+        aaa.transferTo(dest); //保存文件
+//        aaa.transferTo(new File("/static/files","t3.png"));
         return oldName;
     }
 }
