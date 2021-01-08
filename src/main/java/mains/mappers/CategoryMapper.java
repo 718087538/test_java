@@ -8,6 +8,12 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 public interface CategoryMapper {
+    @Insert("insert into lesson (first_category_id,second_category_id,title,cover,direction) values(#{first_category_id},#{second_category_id},#{title},#{cover},#{direction})")
+    public int addLesson(Lesson Lesson);
+//    @Select("select * from lesson")
+    @Select("select * from lesson where title like concat('%',#{title},'%')")
+    public  List<Lesson> getLesson(Lesson lesson);
+
     @Insert("insert into second_category (first_category_id,second_category) values(#{first_category_id},#{second_category})")
     public int addSecondCategory(SecondCategory second_category);
     @Select("select * from second_category")

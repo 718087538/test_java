@@ -10,3 +10,4 @@ spring:
             Driver: com.mysql.cj.jdbc.Driver
 server:
   port: 9000
+
