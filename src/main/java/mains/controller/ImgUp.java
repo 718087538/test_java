@@ -61,9 +61,9 @@ public class ImgUp {
         File dest = new File(filePath);
         img.transferTo(dest); //保存文件
 
-
         imgUp img_up = new imgUp();
         img_up.setPath(path);
+        img_up.setName(oldName);
         ImgUpMapper imgUpMapper = sqlSession.getMapper(ImgUpMapper.class);
 
         imgUpMapper.addImgUp(img_up);
