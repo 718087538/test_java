@@ -22,6 +22,7 @@
         <mapper class="mains.mappers.CategoryMapper"/>
         <mapper class="mains.mappers.ImgUpMapper"/>
         <mapper class="mains.mappers.VideoChapterMapper"/>
+        <mapper class="mains.mappers.VideoLessonMapper"/>
     </mappers>
 
 </configuration>
