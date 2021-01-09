@@ -23,6 +23,7 @@
         <mapper class="mains.mappers.ImgUpMapper"/>
         <mapper class="mains.mappers.VideoChapterMapper"/>
         <mapper class="mains.mappers.VideoLessonMapper"/>
+        <mapper class="mains.mappers.VideoCourseMapper"/>
     </mappers>
 
 </configuration>
