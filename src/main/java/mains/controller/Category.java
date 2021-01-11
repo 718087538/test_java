@@ -19,7 +19,6 @@ import java.util.List;
 public class Category {
     static SqlSessionFactory sessionFactory = null;
     static SqlSession sqlSession = null;
-
     static {
         String resource = "mybatisConfig.xml";
         // 加载mybatis的配置文件（它也加载关联的映射文件）
@@ -35,18 +34,13 @@ public class Category {
         sqlSession = sessionFactory.openSession(true);
     }
 
-    @GetMapping("/t100")
-    public String t100() {
-         return "t1000";
-    }
-
     //一级分类
     @GetMapping("/admin/firstCategory")
     public Result getFirstCategory(){
         FisrtCategory fisrtCategory = new FisrtCategory();
         CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
-        categoryMapper.getFirstCategory(fisrtCategory);
-        return Result.ok("成功");
+        List<FisrtCategory> data = categoryMapper.getFirstCategory();
+        return Result.ok(data);
     }
     @PostMapping("/admin/firstCategory")
     public Result addFirstCategory(String first_category){
@@ -83,7 +77,7 @@ public class Category {
 
     @PostMapping("/admin/secondCategory")
     public Result addSecondCategory(int first_category_id,String second_category){
-        SecondCategory secondCategory = new SecondCategory(first_category_id,second_category);
+        SecondCategory secondCategory = new SecondCategory();
         secondCategory.setfirst_category_id(first_category_id);
         secondCategory.setSecond_category(second_category);
         CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
@@ -92,8 +86,8 @@ public class Category {
     }
 
     @DeleteMapping("/admin/secondCategory")
-    public Result delFirstCategory(int id){
-        FisrtCategory secondCategory = new SecondCategory();
+    public Result delSecondCategory(int id){
+        SecondCategory secondCategory = new SecondCategory();
         secondCategory.setId(id);
         CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
         categoryMapper.delSecondCategory(secondCategory);
@@ -102,9 +96,11 @@ public class Category {
     @PutMapping("/admin/secondCategory")
     public Result putSecondCategory(int id,int first_category_id,String second_category){
         SecondCategory secondCategory = new SecondCategory();
+
         secondCategory.setId(id);
         secondCategory.setfirst_category_id(first_category_id);
         secondCategory.setSecond_category(second_category);
+
         CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
         categoryMapper.putSecondCategory(secondCategory);
         return Result.ok("删除成功");
@@ -115,33 +111,33 @@ public class Category {
 
     //下面的暂时不使用，测试用的
 
-    @GetMapping("/admin/secondCategory")
-    public List<SecondCategory> secondCategory(){
-        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
-        List<SecondCategory> categories = categoryMapper.getSecondCategory();
-        return  categories;
-    }
+//    @GetMapping("/admin/secondCategory")
+//    public List<SecondCategory> secondCategory(){
+//        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+//        List<SecondCategory> categories = categoryMapper.getSecondCategory();
+//        return  categories;
+//    }
 
-    @DeleteMapping("/admin/secondCategory")
-    public Result delSecondCategory(int id){
+//    @DeleteMapping("/admin/secondCategory")
+//    public Result delSecondCategory(int id){
 //        SecondCategory secondCategory = new SecondCategory(id);
 //        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
 //        categoryMapper.delSecondCategory(secondCategory);
-        return Result.ok("删除成功");
-    }
+//        return Result.ok("删除成功");
+//    }
 
-    @PutMapping("/admin/secondCategory")
-    public Result putSecondCategory(int id,String second_category){
-        System.out.println("id的值是："+id+"名字是"+second_category);
-
-        SecondCategory secondCategory = new SecondCategory();//???参数类型一样，值不一样，怎么办?
-        secondCategory.setId(id);
-        secondCategory.setSecond_category(second_category);
-        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
-        System.out.println("对象是"+categoryMapper);
-        categoryMapper.putSecondCategory(secondCategory);
-        return Result.ok("修改成功");
-    }
+//    @PutMapping("/admin/secondCategory")
+//    public Result putSecondCategory(int id,String second_category){
+//        System.out.println("id的值是："+id+"名字是"+second_category);
+//
+//        SecondCategory secondCategory = new SecondCategory();//???参数类型一样，值不一样，怎么办?
+//        secondCategory.setId(id);
+//        secondCategory.setSecond_category(second_category);
+//        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+//        System.out.println("对象是"+categoryMapper);
+//        categoryMapper.putSecondCategory(secondCategory);
+//        return Result.ok("修改成功");
+//    }
 
     //新建课程/教程
     @PostMapping("/admin/lesson")
