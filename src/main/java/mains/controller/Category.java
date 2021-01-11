@@ -1,4 +1,4 @@
-package mains.category;
+package mains.controller;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import mains.model.FisrtCategory;
@@ -37,7 +37,6 @@ public class Category {
 
     @GetMapping("/t100")
     public String t100() {
-
          return "t1000";
     }
     @PutMapping("/admin/category")
@@ -47,7 +46,7 @@ public class Category {
         categoryMapper.putFirstCategory(fisrtCategory);
         return Result.ok("修改成功");
     }
-    @PostMapping("/admin/category")
+    @PostMapping("/admin/firstCategory")
     public Result addFirstCategory(String first_category){
         FisrtCategory fisrtCategory = new FisrtCategory(first_category);
         CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
