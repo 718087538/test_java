@@ -39,12 +39,14 @@ public class Category {
     public String t100() {
          return "t1000";
     }
-    @PutMapping("/admin/category")
-    public Result putFirstCategory(int id,String first_category){
-        FisrtCategory fisrtCategory = new FisrtCategory(id,first_category);
+
+    //一级分类
+    @GetMapping("/admin/firstCategory")
+    public Result getFirstCategory(){
+        FisrtCategory fisrtCategory = new FisrtCategory();
         CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
-        categoryMapper.putFirstCategory(fisrtCategory);
-        return Result.ok("修改成功");
+        categoryMapper.getFirstCategory(fisrtCategory);
+        return Result.ok("成功");
     }
     @PostMapping("/admin/firstCategory")
     public Result addFirstCategory(String first_category){
@@ -53,22 +55,65 @@ public class Category {
         categoryMapper.addFirstCategory(fisrtCategory);
         return Result.ok("成功插入");
     }
-
-    @GetMapping("/admin/category")
-    public List<FisrtCategory> category(){
+    @PutMapping("/admin/firstCategory")
+    public Result putFirstCategory(int id,String first_category){
+        FisrtCategory fisrtCategory = new FisrtCategory(id,first_category);
         CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
-        List<FisrtCategory> category = categoryMapper.getCategory();
-        return category;
+        categoryMapper.putFirstCategory(fisrtCategory);
+        return Result.ok("修改成功");
+    }
+    @DeleteMapping("/admin/firstCategory")
+    public Result delFirstCategory(int id){
+        FisrtCategory fisrtCategory = new FisrtCategory();
+        fisrtCategory.setId(id);
+        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        categoryMapper.delFirstCategory(fisrtCategory);
+        return Result.ok("删除成功");
+    }
+
+
+    //二级分类
+    @GetMapping("/admin/secondCategory")
+    public Result getSecondCategory(){
+        SecondCategory secondCategory = new SecondCategory();
+        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        List<SecondCategory> category = categoryMapper.getSecondCategory();
+        return Result.ok(category);
     }
 
     @PostMapping("/admin/secondCategory")
     public Result addSecondCategory(int first_category_id,String second_category){
-//        SecondCategory secondCategory = new SecondCategory(first_category_id,second_category);
-//        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
-//        categoryMapper.addSecondCategory(secondCategory);
-//        return Result.ok("成功新增二级标签");
-        return null;
+        SecondCategory secondCategory = new SecondCategory(first_category_id,second_category);
+        secondCategory.setfirst_category_id(first_category_id);
+        secondCategory.setSecond_category(second_category);
+        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        categoryMapper.addSecondCategory(secondCategory);
+        return Result.ok("成功新增二级标签");
     }
+
+    @DeleteMapping("/admin/secondCategory")
+    public Result delFirstCategory(int id){
+        FisrtCategory secondCategory = new SecondCategory();
+        secondCategory.setId(id);
+        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        categoryMapper.delSecondCategory(secondCategory);
+        return Result.ok("删除成功");
+    }
+    @PutMapping("/admin/secondCategory")
+    public Result putSecondCategory(int id,int first_category_id,String second_category){
+        SecondCategory secondCategory = new SecondCategory();
+        secondCategory.setId(id);
+        secondCategory.setfirst_category_id(first_category_id);
+        secondCategory.setSecond_category(second_category);
+        CategoryMapper categoryMapper = sqlSession.getMapper(CategoryMapper.class);
+        categoryMapper.putSecondCategory(secondCategory);
+        return Result.ok("删除成功");
+    }
+
+
+
+
+    //下面的暂时不使用，测试用的
 
     @GetMapping("/admin/secondCategory")
     public List<SecondCategory> secondCategory(){
