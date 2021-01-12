@@ -6,9 +6,9 @@ public class SecondCategory {
     private String second_category;
     private int id_del;
 
-//    public SecondCategory() {
-//
-//    }
+    public SecondCategory() {
+
+    }
 //    public SecondCategory(int id){
 //        this.id = id;
 //    }

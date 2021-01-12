@@ -1,10 +1,18 @@
 package mains.model;
 
 public class FisrtCategory {
-    private String first_category;
+
     private int id;
+    private String first_category;
+    private int is_del;
 
+    public int getIs_del() {
+        return is_del;
+    }
 
+    public void setIs_del(int is_del) {
+        this.is_del = is_del;
+    }
 
     public FisrtCategory() {
 

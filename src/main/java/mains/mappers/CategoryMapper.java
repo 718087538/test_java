@@ -14,22 +14,24 @@ public interface CategoryMapper {
     @Select("select * from lesson where title like concat('%',#{title},'%')")
     public  List<Lesson> getLesson(Lesson lesson);
 
+//    二级分类相关
     @Insert("insert into second_category (first_category_id,second_category) values(#{first_category_id},#{second_category})")
     public int addSecondCategory(SecondCategory second_category);
-    @Select("select * from second_category")
+    @Select("select * from second_category where is_del=0")
     public  List<SecondCategory> getSecondCategory();
     @Update("update second_category set is_del=1 where id=#{id}")
     public  int delSecondCategory(SecondCategory second_category);
     @Update("update second_category set second_category=#{second_category} where id=#{id}")
     public  int putSecondCategory(SecondCategory second_category);
 
-
-    @Update("update first_category set first_category=#{first_category} where id=#{id}")
-    public int putFirstCategory(FisrtCategory first_category);
-
+ //      一级分类相关
     @Insert("insert into first_category (first_category) values(#{first_category})")
     public int addFirstCategory(FisrtCategory first_category);
-
-    @Select("select * from first_category where trim(first_category)!=''")
-    public List<FisrtCategory> getCategory();
+//    @Select("select * from first_category where trim(first_category)!=''")
+    @Select("select * from first_category where is_del=0")
+    public List<FisrtCategory> getFirstCategory();
+    @Update("update first_category set first_category=#{first_category} where id=#{id}")
+    public int putFirstCategory(FisrtCategory first_category);
+    @Update("update first_category set is_del=1 where id=#{id}")
+    public  int delFirstCategory(FisrtCategory first_category);
 }
